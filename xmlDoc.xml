@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<productsInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema.xsd">
+	
+	<productInformation>
+		<productName>Te</productName>
+		<productDescription>Te</productDescription>
+		<productReleaseDate>2004-12-14</productReleaseDate>
+		<productCost currency='USD'>65.5</productCost>
+		<companyInformation>
+			<companyName>Testing</companyName>
+			<companyAddress>
+				<streetName>7 Test</streetName>
+				<city>Tes</city>
+				<zipCode>22222</zipCode>
+				<country>INDIA</country>
+			</companyAddress>
+		</companyInformation>
+	
+	</productInformation>
+	
+</productsInformation>

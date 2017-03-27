@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sample page to read and display XML Data</title>
+	</head>
+	<body>
+		<div id="contents"></div>
+		<br/>
+		<h3 id="totalCost"></h3>
+		<br/>
+		<div id="totalCostByAuthByPub"><h3>Total cost of books written by an author for a publisher from the same city:</h3></div>
+		<br/>
+		
+		<div id="booksLessThan100"><h3>Books costs which is  greater than 25 and less than $100:</h3></div>
+		<div id="booksPublisherAfter2010"><h3>Books title, author name and publisher name published after 2010:</h3></div>
+		<script type="text/javascript">
+		//var data ="<books><book><title>Harry Potter</title><ISBN>A12-34B-CD89</ISBN><price currency='USD'>21.33</price><publicationDate>2009-10-14</publicationDate><circulationDuration>P5Y</circulationDuration><author><authorName><lastName>M</lastName><middleInitial>M.</middleInitial><firstName>Kiran</firstName></authorName><authorEducation>MS</authorEducation><authorDOB>1991-11-14</authorDOB></author><publisher><publisherName>Mcgraw Hill</publisherName><publisherAddress><streetName>16500 Lauder Lane</streetName><suiteNumber>3107</suiteNumber><city>Dallas</city><zipcode>75248</zipcode><country>USA</country></publisherAddress></publisher></book><book><title>Java for Dummies</title><ISBN>B12-3CB-C182</ISBN><price currency='USD'>12.33</price><publicationDate>2013-10-14</publicationDate><circulationDuration>P3Y2M</circulationDuration><author><authorName><lastName>M</lastName><middleInitial>M.</middleInitial><firstName>Kiran</firstName></authorName><authorEducation>MS</authorEducation><authorDOB>1991-11-14</authorDOB></author><publisher><publisherName>Jack Jones</publisherName><publisherAddress><streetName>1650 Vintage Lane</streetName><suiteNumber>1327</suiteNumber><city>Cupertino</city><zipcode>75452</zipcode><country>USA</country></publisherAddress></publisher></book><book><title>Learn SQL</title><ISBN>F52-J43-CK81</ISBN><price currency='USD'>11.32</price><publicationDate>2008-10-14</publicationDate><circulationDuration>P8Y7M</circulationDuration><author><authorName><lastName>Rubin</lastName><middleInitial>L.</middleInitial><firstName>Andy</firstName></authorName><authorEducation>PHD</authorEducation><authorDOB>1980-12-24</authorDOB></author><publisher><publisherName>Herbert</publisherName><publisherAddress><streetName>500 Sherlock Lane</streetName><suiteNumber>107</suiteNumber><city>Sunnyvale</city><zipcode>65248</zipcode><country>USA</country></publisherAddress></publisher></book><book><title>Master Your Business</title><ISBN>AJ2-R4B-SD09</ISBN><price currency='USD'>31.33</price><publicationDate>2015-10-14</publicationDate><circulationDuration>P2Y3M</circulationDuration><author><authorName><lastName>Zule</lastName><middleInitial>M.</middleInitial><firstName>Mark</firstName></authorName><authorEducation>MBA</authorEducation><authorDOB>1971-01-11</authorDOB></author><publisher><publisherName>Jack Jones</publisherName><publisherAddress><streetName>1650 Vintage Lane</streetName><suiteNumber>1327</suiteNumber><city>Cupertino</city><zipcode>75452</zipcode><country>USA</country></publisherAddress></publisher></book><book><title>Learn Karathe</title><ISBN>T12-32B-JD8F</ISBN><price currency='USD'>9.31</price><publicationDate>2005-10-14</publicationDate><circulationDuration>P9Y3M</circulationDuration><author><authorName><lastName>M</lastName><middleInitial>M.</middleInitial><firstName>Kiran</firstName></authorName><authorEducation>MS</authorEducation><authorDOB>1991-11-14</authorDOB></author><publisher><publisherName>Jack Jones</publisherName><publisherAddress><streetName>1650 Vintage Lane</streetName><suiteNumber>1327</suiteNumber><city>Cupertino</city><zipcode>75452</zipcode><country>USA</country></publisherAddress></publisher></book><book><title>Secret Of Life</title><ISBN>K12-T4B-CDL9</ISBN><price currency='USD'>19.45</price><publicationDate>2016-01-14</publicationDate><circulationDuration>P5M</circulationDuration><author><authorName><lastName>Phil</lastName><middleInitial>M.</middleInitial><firstName>Jack</firstName></authorName><authorEducation>BS</authorEducation><authorDOB>1974-10-29</authorDOB></author><publisher><publisherName>Jack Jones</publisherName><publisherAddress><streetName>1650 Vintage Lane</streetName><suiteNumber>1327</suiteNumber><city>Cupertino</city><zipcode>75452</zipcode><country>USA</country></publisherAddress></publisher></book></books>";
+		var data = "<products>	<companyInformation> <CompanyName> abc</CompanyName> <CompanyAddress> <streetName> dcs </streetName> <city>acs </city> <zipcode> 45455</zipcode><country> IN </country></CompanyAddress></CompanyInformation> </products>"
+
+		var parser = new DOMParser();
+		var xmlDoc = parser.parseFromString(data,"text/xml");
+	
+		var table="<table border='3px'><tr><th rowspan='2'>Company Name</th><th rowspan='2'>Company Address</th><th colspan='6'>Author</th></tr><tr><th>Street Name</th><th>City</th><th>Zip Code</th><th>Country</th></tr>";
+	
+		document.getElementById("contents").innerHTML = displayAllBooks(table);
+		
+		document.getElementById("totalCostByAuthByPub").innerHTML =	 document.getElementById("totalCostByAuthByPub").innerHTML + displayTotalCostByAuthByPub();
+		
+		
+
+	
+		
+		document.getElementById("booksLessThan100").innerHTML = document.getElementById("booksLessThan100").innerHTML + displayBooksLessThan100AndGreaterThan25();
+
+		document.getElementById("booksPublisherAfter2010").innerHTML = document.getElementById("booksPublisherAfter2010").innerHTML + displayBooksPublisherAfter2010();
+
+		function displayAllBooks(table) {
+			var newtable = table;
+			var products = xmlDoc.getElementsByTagName("Products");
+			for(var i = 0; i < Products.length; i++) {
+				newtable += "<tr>";
+				var book = products[i];
+				/*newtable = addBookTitle(book, newtable);
+				 
+				newtable = addBookPrice(book, newtable); 
+				newtable = addPublicationDate(book, newtable);
+				
+				newtable = addAuthorNames(book, newtable);
+				
+				newtable = addPublisherName(book, newtable);
+				newtable = addPublisherAddress(book, newtable);*/
+				newtable += "</tr>";
+			}
+			
+			newtable += "</table>";
+			return newtable;
+		}
+		
+		function addCompanyName(book, table) {
+			var CompanyName =	book.getElementsByTagName("CompanyName");
+			return table + "<td>" + title[0].textContent + "</td>";
+		}
+	
+		
+		function addBookPrice(book, table) {
+			var CompanyAddress = book.getElementsByTagName("CompanyAddress");
+			return table + "<td>" + price[0].textContent + "</td>";
+		}
+		
+	
+		
+		function addPublicationDate(book, table) {
+			var date = book.getElementsByTagName("PublicationDate");
+			return table + "<td>" + date[0].textContent + "</td>";
+		}
+		
+	
+			
+		function addAuthorNames(book, table) {
+	
+			var authorName = book.getElementsByTagName("AuthorName");
+			for(k = 0; k < authorName.length; k++) {
+			var elements = authorName[k].childNodes;
+			for(j = 0; j < elements.length; j++) {
+				table += "<td>" + elements[j].textContent + "</td>";
+			}
+			}
+			return table;
+		}
+		
+		function addPublisherName(book, table) {
+			var publisherName = book.getElementsByTagName("PublisherName");
+			return table + "<td>" + publisherName[0].textContent + "</td>";
+		} 
+		
+		function addPublisherAddress(book, table) {
+			var addrElem = product.getElementsByTagName("PublisherAddress")[0].childNodes;
+			for(k = 0; k < addrElem.length; k++) {
+				table += "<td>" + addrElem[k].textContent + "</td>";
+			}
+			return table;
+		}
+		
+	</script>	
+	</body>
+</html>
