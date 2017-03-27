@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+	<xs:element name="productName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z][a-z]*"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+	<xs:element name="productDescription">
+		<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z][a-z]*"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+         <xs:element name="productReleaseDate">
+		<xs:simpleType>
+		<xs:restriction base="xs:date">
+
+		</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+
+
+        <xs:element name="productCost">
+			<xs:complexType>
+				<xs:simpleContent>
+					<xs:extension base="xs:decimal">
+						<xs:attribute name="currency" type="xs:string"/>
+					</xs:extension>
+				</xs:simpleContent>	
+			</xs:complexType>
+	</xs:element>
+	
+	
+
+
+           
+<xs:element name="companyName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z][a-z]*"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+
+	<xs:element name="streetName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="[0-9]+([ ]+[A-Z][a-z]*)*"/>			
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+		
+
+	<xs:element name="zipCode">
+		<xs:simpleType>
+			<xs:restriction base="xs:integer">
+				<xs:minInclusive value="11111"/>
+				<xs:maxInclusive value="99999"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	
+	<xs:element name="city">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z][a-z]*"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="country">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="[A-Z]*"/>			
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+
+        
+	<xs:element name="companyInformation">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='companyName'/>
+				<xs:element ref='companyAddress'/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+
+       
+	
+
+
+	<xs:element name='companyAddress'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='streetName'/>
+				<xs:element ref='city'/>
+				<xs:element ref='zipCode'/>
+				<xs:element ref='country'/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+        
+		
+	<xs:element name="productInformation">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='productName'/>
+				<xs:element ref='productDescription'/>
+				<xs:element ref='productReleaseDate'/>
+				<xs:element ref='productCost'/>
+				<xs:element ref='companyInformation'/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>	
+	
+	<xs:element name="productsInformation">
+		<xs:complexType>
+			<xs:choice minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="productInformation"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>	
+</xs:schema>
